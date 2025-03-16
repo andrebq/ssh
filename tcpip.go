@@ -38,9 +38,14 @@ func DirectTCPIPHandler(srv *Server, conn *gossh.ServerConn, newChan gossh.NewCh
 	}
 
 	dest := net.JoinHostPort(d.DestAddr, strconv.FormatInt(int64(d.DestPort), 10))
-
-	var dialer net.Dialer
-	dconn, err := dialer.DialContext(ctx, "tcp", dest)
+	var dconn net.Conn
+	var err error
+	if srv.DialForLocalPortForward != nil {
+		dconn, err = srv.DialForLocalPortForward(ctx, d.DestAddr, d.DestPort)
+	} else {
+		var dialer net.Dialer
+		dconn, err = dialer.DialContext(ctx, "tcp", dest)
+	}
 	if err != nil {
 		newChan.Reject(gossh.ConnectionFailed, err.Error())
 		return

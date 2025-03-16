@@ -67,6 +67,9 @@ type ReversePortForwardingCallback func(ctx Context, bindHost string, bindPort u
 // ListenerForReverseForward is a hook to control how to create a Listener for a Reverse Port Forward operation
 type ListenerForReverseForward func(ctx Context, bindHost string, bindPort uint32) (net.Listener, error)
 
+// DialForLocalPortForward is a hook to control how to create a net.Conn for a Local Port Forward operation
+type DialForLocalPortForward func(ctx Context, bindHost string, bindPort uint32) (net.Conn, error)
+
 // ServerConfigCallback is a hook for creating custom default server configs
 type ServerConfigCallback func(ctx Context) *gossh.ServerConfig
 

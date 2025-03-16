@@ -51,6 +51,7 @@ type Server struct {
 	SessionRequestCallback        SessionRequestCallback        // callback for allowing or denying SSH sessions
 
 	ListenerForReverseForward ListenerForReverseForward // callback to control how net.Listener is created for SSH Reverse Port Forwarding
+	DialForLocalPortForward   DialForLocalPortForward   // callback to control how net.Conn is created for SSH Local Port Forwarding
 
 	ConnectionFailedCallback ConnectionFailedCallback // callback to report connection failures
 
