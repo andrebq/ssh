@@ -50,6 +50,8 @@ type Server struct {
 	ServerConfigCallback          ServerConfigCallback          // callback for configuring detailed SSH options
 	SessionRequestCallback        SessionRequestCallback        // callback for allowing or denying SSH sessions
 
+	ListenerForReverseForward ListenerForReverseForward // callback to control how net.Listener is created for SSH Reverse Port Forwarding
+
 	ConnectionFailedCallback ConnectionFailedCallback // callback to report connection failures
 
 	HandshakeTimeout time.Duration // connection timeout until successful handshake, none if empty
